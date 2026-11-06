@@ -6,31 +6,43 @@ People Memory gives your AI assistant a lasting memory of the people you know: w
 
 ## How it works
 
-Simple and intuitive.
+Simple and intuitive. These conceptual chat demos use fictional people and follow one story from recording to retrieval.
 
 ### 📝 Remember people
 
-Use `/record`:
+Use `/record` and share a conversation, screenshot, or notes. Your assistant extracts the relevant details.
 
-> “/record Here’s my conversation with Alex. Remember what Alex is looking for and anything I promised to follow up on.”
+![Fictional chat: record Alex’s hardware project, PCB designer request, and need for five user testers.](docs/images/01-remember-people.png)
 
 You can also share information naturally—automatic recording is on by default.
 
 ### 🔗 Discover connections
 
-Later, you meet someone else:
+Mention someone new, and your assistant can connect their skills to a saved need. Later updates resolve each need separately while preserving the original conversation.
 
-> “I met Ben today. Ben designs PCBs, works with Raspberry Pi, and is interested in advising startups. Does this help anyone I’ve mentioned before?”
-
-**Example response:** “Alex previously asked for PCB design and embedded systems help. Ben may be a fit. We should check that Alex still needs help and that Ben is open to an introduction.”
+![Fictional chat: Ben’s PCB skills match Alex’s request; after Alex hires Ben, only the PCB need is resolved and the user-testing need stays active.](docs/images/02-discover-connections.png)
 
 ### 🔎 Retrieve people’s information
 
-Ask for saved information in everyday language:
+Ask in everyday language.
+
+**See everyone you’ve recorded**
 
 > “Show me everyone I’ve recorded.”
->
+
+![Fictional chat listing Alex and Ben with their saved backgrounds and current context.](docs/images/03-list-people.png)
+
+**Recall a specific person**
+
 > “What do you remember about Alex?”
+
+![Fictional chat showing Alex’s profile, resolved PCB need, active tester need, follow-up, and preserved conversation history.](docs/images/04-person-history.png)
+
+**See who currently needs help**
+
+> “Who currently needs help?”
+
+![Fictional chat showing Alex’s remaining active need for five testers, with the resolved PCB request excluded from active matches.](docs/images/05-active-needs.png)
 
 ## Getting started
 
