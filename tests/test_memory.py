@@ -1,3 +1,4 @@
+from contextlib import closing
 import json
 import os
 from pathlib import Path
@@ -121,7 +122,7 @@ class MemoryTests(unittest.TestCase):
     def test_unknown_schema_is_not_modified(self):
         path=Path(self.tmp.name)/"future.sqlite3";db=sqlite3.connect(path);db.execute("PRAGMA user_version=99");db.close()
         with self.assertRaises(MemoryError):Memory(path)
-        with sqlite3.connect(path) as db:self.assertEqual(db.execute("PRAGMA user_version").fetchone()[0],99)
+        with closing(sqlite3.connect(path)) as db:self.assertEqual(db.execute("PRAGMA user_version").fetchone()[0],99)
 
     def test_old_schema_requires_explicit_import(self):
         path=Path(self.tmp.name)/"legacy.sqlite3";db=sqlite3.connect(path);db.execute("CREATE TABLE people(id TEXT)");db.close()
