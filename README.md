@@ -1,6 +1,6 @@
 # People Memory
 
-Relationship memory for your AI assistant. Remember what people need, what they can offer, and what you discussed—then use that context when something relevant comes up.
+Meet lots of people but struggle to remember everyone’s story? People Memory is designed for you. Whenever you meet someone new or share updates about friends and acquaintances, your connected AI assistant can save the details and bring them back whenever you need them.
 
 [How it works](#how-it-works) · [Getting started](#getting-started)
 
