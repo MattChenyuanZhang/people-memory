@@ -1,6 +1,6 @@
 # People Memory
 
-Meet lots of people but struggle to remember everyone’s story? People Memory is designed for you. Whenever you meet someone new or share updates about friends and acquaintances, your connected AI assistant can save the details and bring them back whenever you need them. When you come across something useful, your assistant can connect it to people in your network whose needs it could meet—even if you’ve forgotten who asked.
+People Memory gives your AI assistant a lasting memory of the people you know: what they’re working on, what they need, what they can offer, and your past conversations. Share updates naturally in chat. Your assistant can save the details, recall them later, and surface relevant connections when you mention a new person, resource, or opportunity—without you having to remember who needed what.
 
 [How it works](#how-it-works) · [Getting started](#getting-started)
 
