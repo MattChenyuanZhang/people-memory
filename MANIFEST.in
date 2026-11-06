@@ -1,5 +1,6 @@
 include README.md LICENSE
-recursive-include docs *.md *.png
+recursive-include docs *.md *.png *.html
+include docs/.nojekyll
 recursive-include skills *.md *.yaml
 recursive-include examples *.json
 recursive-include tests *.py *.sql

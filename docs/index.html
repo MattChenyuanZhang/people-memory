@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>People Memory — Demo</title>
+<meta name="description" content="Five connected fictional conversations showing how People Memory records people, discovers connections, and recalls active needs.">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f7f6;color:#202020;font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{width:min(100% - 32px,780px);margin:32px auto}header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px}h1{font-size:24px;letter-spacing:-.7px;margin:0}a{color:inherit;text-underline-offset:3px}.intro{color:#666;margin:0 0 20px}.viewer{background:white;border:1px solid #dededb;border-radius:16px;overflow:hidden}figure{margin:0}figure img{display:block;width:100%;height:auto;max-height:60vh;object-fit:contain;background:white}figcaption{padding:16px 20px;border-top:1px solid #eee;min-height:80px}figcaption strong{display:block}figcaption span{color:#666;font-size:14px}.controls{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-top:1px solid #eee}button{font:inherit;cursor:pointer;border:1px solid #ddd;background:white;border-radius:8px;min-height:44px;padding:8px 14px;color:#202020}button:hover{background:#f0f0ee}button:focus-visible,a:focus-visible{outline:3px solid #4778e8;outline-offset:3px}.pages{display:flex;gap:5px}.pages button{min-width:34px;padding:6px}.pages button[aria-current="step"]{background:#202020;border-color:#202020;color:white}.hint{text-align:center;color:#737373;font-size:13px;margin:14px 0}#error{padding:16px;color:#9b2222}@media(max-width:520px){main{margin:20px auto}header{align-items:center}header a{font-size:13px}.controls{padding:12px;gap:6px}button{padding:8px 10px}.pages{gap:3px}.pages button{min-width:29px;padding:5px}figcaption{padding:14px}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>People Memory</h1><a href="https://github.com/MattChenyuanZhang/people-memory#how-it-works">Back to README</a></header>
+<p class="intro">One story, five conversations. All people and examples are fictional.</p>
+<section class="viewer" aria-label="People Memory demo slideshow" aria-roledescription="carousel">
+<figure>
+<img id="slide" src="images/01-remember-people.png" width="1536" height="1024" alt="Record Alex’s hardware project and two needs: a PCB designer and five user testers.">
+<figcaption aria-live="polite" aria-atomic="true"><strong id="title">1 of 5 · Remember people</strong><span id="caption">Share context with /record. Your assistant extracts the details.</span></figcaption>
+</figure>
+<p id="error" hidden>Image could not load. <a id="image-link" href="images/01-remember-people.png">Open the image directly.</a></p>
+<nav class="controls" aria-label="Slideshow controls">
+<button id="prev" type="button" aria-label="Previous demo">← <span>Prev</span></button>
+<div class="pages" aria-label="Choose a demo">
+<button type="button" data-slide="0" aria-label="Demo 1: Remember people" aria-current="step">1</button>
+<button type="button" data-slide="1" aria-label="Demo 2: Discover connections">2</button>
+<button type="button" data-slide="2" aria-label="Demo 3: See everyone">3</button>
+<button type="button" data-slide="3" aria-label="Demo 4: Recall one person">4</button>
+<button type="button" data-slide="4" aria-label="Demo 5: See who needs help">5</button>
+</div>
+<button id="next" type="button" aria-label="Next demo"><span>Next</span> →</button>
+</nav>
+</section>
+<p class="hint">Use the arrows, press ← / →, or swipe on your phone.</p>
+<noscript><p>Enable JavaScript to switch slides, or open the demos directly:</p><ol>
+<li><a href="images/01-remember-people.png">Remember people</a></li>
+<li><a href="images/02-discover-connections.png">Discover connections</a></li>
+<li><a href="images/03-list-people.png">See everyone</a></li>
+<li><a href="images/04-person-history.png">Recall one person</a></li>
+<li><a href="images/05-active-needs.png">See who needs help</a></li>
+</ol></noscript>
+</main>
+<script>
+const slides = [
+  ["01-remember-people.png", "Remember people", "Share context with /record. Your assistant extracts the details.", "Record Alex’s hardware project and two needs: a PCB designer and five user testers."],
+  ["02-discover-connections.png", "Discover connections", "Ben fills Alex’s PCB role. The user-testing need stays active.", "Ben’s PCB skills match Alex’s need; after a confirmed hire, only the PCB request is resolved."],
+  ["03-list-people.png", "See everyone", "Ask for everyone you have recorded, with a brief overview.", "List Alex and Ben with their saved backgrounds and current context."],
+  ["04-person-history.png", "Recall one person", "Retrieve Alex’s details, needs, follow-ups, and conversation history.", "Alex’s profile includes a resolved PCB need and an active need for five testers."],
+  ["05-active-needs.png", "See who needs help", "Resolved needs leave active matches while their history remains available.", "Alex still needs five testers; the PCB request is resolved and no active need is recorded for Ben."]
+];
+const image = document.getElementById("slide");
+const buttons = [...document.querySelectorAll("[data-slide]")];
+let current = 0;
+function show(index, updateHash = true) {
+  current = (index + slides.length) % slides.length;
+  const [file, title, caption, alt] = slides[current];
+  document.getElementById("error").hidden = true;
+  image.src = "images/" + file;
+  image.alt = alt;
+  document.getElementById("image-link").href = image.src;
+  document.getElementById("title").textContent = `${current + 1} of ${slides.length} · ${title}`;
+  document.getElementById("caption").textContent = caption;
+  buttons.forEach((button, index) => {
+    if (index === current) button.setAttribute("aria-current", "step");
+    else button.removeAttribute("aria-current");
+  });
+  if (updateHash) history.replaceState(null, "", "#" + (current + 1));
+}
+function fromHash() {
+  const number = Number(location.hash.slice(1));
+  show(Number.isInteger(number) && number >= 1 && number <= slides.length ? number - 1 : 0, false);
+}
+document.getElementById("prev").addEventListener("click", () => show(current - 1));
+document.getElementById("next").addEventListener("click", () => show(current + 1));
+buttons.forEach(button => button.addEventListener("click", () => show(Number(button.dataset.slide))));
+document.addEventListener("keydown", event => {
+  if (event.altKey || event.ctrlKey || event.metaKey || /INPUT|TEXTAREA|SELECT/.test(event.target.tagName) || event.target.isContentEditable) return;
+  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+    event.preventDefault(); show(current + (event.key === "ArrowRight" ? 1 : -1));
+  }
+});
+let touchStart = null;
+image.addEventListener("touchstart", event => {touchStart = [event.touches[0].clientX, event.touches[0].clientY];}, {passive:true});
+image.addEventListener("touchend", event => {
+  if (!touchStart) return;
+  const dx = event.changedTouches[0].clientX - touchStart[0];
+  const dy = event.changedTouches[0].clientY - touchStart[1];
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+  touchStart = null;
+}, {passive:true});
+image.addEventListener("error", () => {document.getElementById("error").hidden = false;});
+window.addEventListener("hashchange", fromHash);
+fromHash();
+</script>
+</body>
+</html>
