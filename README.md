@@ -2,9 +2,9 @@
 
 Relationship memory for your AI assistant. Remember what people need, what they can offer, and what you discussed—then use that context when something relevant comes up.
 
-[How to use it](#how-to-use-it) · [Getting started](#getting-started)
+[How it works](#how-it-works) · [Getting started](#getting-started)
 
-## How to use it
+## How it works
 
 Once installed and connected, use your normal AI chat.
 
