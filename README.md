@@ -121,4 +121,5 @@ Uninstall by disconnecting the MCP server and removing the installed environment
 
 ## License
 
-[MIT](LICENSE).
+[MIT](LICENSE). Always free.
+
