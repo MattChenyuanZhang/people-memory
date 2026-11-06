@@ -1,0 +1,15 @@
+{
+  "name": "Riley Example",
+  "source_text": "I met Riley today. Riley needs a PCB designer for a prototype.",
+  "observations": [
+    {
+      "category": "need",
+      "text": "Seeking PCB design help for a prototype",
+      "evidence": "Riley needs a PCB designer for a prototype",
+      "certainty": "explicit"
+    }
+  ],
+  "account_urls": ["https://example.com/fictional-riley"],
+  "occurred_on": null,
+  "request_id": "fictional-demo-riley-1"
+}

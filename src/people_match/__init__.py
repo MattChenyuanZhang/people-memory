@@ -1,0 +1,2 @@
+"""People Match relationship memory."""
+__version__ = "0.1.0"
