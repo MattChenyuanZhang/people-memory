@@ -34,9 +34,20 @@ Ask for saved information in everyday language:
 
 ## Getting started
 
-Complete these steps before using the chat workflows above.
+You’ll need Python 3.10+ and an AI app that supports local MCP servers.
 
-### 1. Check the requirements
+### Set up with an AI assistant
+
+Paste this into an AI coding assistant that can run commands and edit files on your computer:
+
+> Install People Memory from https://github.com/MattChenyuanZhang/people-memory. Follow its manual setup and connection guide for my AI app, preserving existing settings. Enable the memory instructions, tell me where my database is stored, and verify saving and retrieving a fictional person. If a step needs me to act in the app, tell me what to do.
+
+### Install manually
+
+<details>
+<summary>Open the step-by-step instructions</summary>
+
+#### 1. Check the requirements
 
 - Python 3.10 or newer, with SQLite FTS5 support.
 - An AI app that supports **local MCP servers**—a way for the assistant to call tools on your computer.
@@ -44,7 +55,7 @@ Complete these steps before using the chat workflows above.
 
 People Memory doesn't need its own model API key. Your chosen assistant may require an account, subscription, or API access.
 
-### 2. Download
+#### 2. Download
 
 Download and extract the source ZIP from [Releases](https://github.com/MattChenyuanZhang/people-memory/releases), or clone:
 
@@ -55,7 +66,7 @@ cd people-memory
 
 Open a terminal in the extracted/cloned folder. Keep it in a permanent location so your app's connection path won't break later.
 
-### 3. Install and create your database
+#### 3. Install and create your database
 
 **macOS / Linux:**
 
@@ -77,7 +88,7 @@ py -m venv .venv
 
 The package and command currently retain their original names, `people-match-memory` and `people-match`. The repository is called People Memory. Install from this download; the package isn't published on PyPI.
 
-### 4. Connect your AI app
+#### 4. Connect your AI app
 
 Follow the [connection guide](docs/connecting.md) for your app. Register a **local stdio MCP server** with:
 
@@ -86,7 +97,7 @@ Follow the [connection guide](docs/connecting.md) for your app. Register a **loc
 
 Your app starts this process when it needs the tools. You don't need to leave a manually launched server running in a terminal.
 
-### 5. Load the memory instructions
+#### 5. Load the memory instructions
 
 Display the bundled instructions:
 
@@ -104,7 +115,7 @@ Add the output to your assistant's persistent project instructions, preserving a
 
 **The connection provides the tools; the instructions explain when to record and retrieve.** Each app/project you use needs the appropriate setup.
 
-### 6. Verify before using real information
+#### 6. Verify before using real information
 
 In a new connected chat:
 
@@ -113,6 +124,10 @@ In a new connected chat:
 3. In a fresh chat, ask: “Search my memory: what does Riley Example need?” Check that the saved need and evidence are retrieved.
 
 Then follow the [full first-use check](docs/connecting.md#4-check-it-with-fictional-information) to test updates, pause, exclusions, and cross-app recall. You're ready to try the natural-language workflows above when these checks work in your app.
+
+</details>
+
+For app-specific setup and troubleshooting, see the [connection guide](docs/connecting.md).
 
 ### Further details
 
