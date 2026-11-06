@@ -1,163 +1,148 @@
 # People Memory
 
-External relationship memory for AI assistants. Talk naturally about real interactions; your connected assistant records source-backed information, recalls it later, and reasons about useful introductions.
+Relationship memory for your AI assistant. Remember what people need, what they can offer, and what you discussed—then use that context when something relevant comes up.
 
-**Version 0.1.0 is a local developer preview.** The storage engine, command-line interface, and stdio MCP server work. Two independent MCP SDK clients are integration-tested; live ChatGPT, Claude Desktop, and Codex conversations have not yet been validated. No GUI, hosted service, or automatic social-message sync is included.
+[How to use it](#how-to-use-it) · [Getting started](#getting-started)
 
 ## How to use it
 
-### 1. Install and connect once
+Once installed and connected, use your normal AI chat.
 
-[Download People Memory](https://github.com/MattChenyuanZhang/people-memory/releases), follow [installation](#install), and [connect your AI app](docs/connecting.md). Load the bundled assistant instructions as described in that guide to enable automatic recording.
+### Record information about someone
 
-### 2. Tell your assistant about people
+**Use natural language:**
 
-Talk naturally, paste a conversation, or attach a screenshot:
+> “I met Alex today. Alex is building a hardware startup and needs someone with PCB design and embedded systems experience.”
 
-> “I met Riley today. Riley designs PCBs and is interested in startup projects.”
+Your assistant should identify Alex, save the relevant information and its source, and briefly confirm what it recorded. You can also paste a conversation, attach a screenshot, or include a profile link to identify the person. A profile link alone doesn't give access to private messages.
 
-Your connected assistant should save the relevant information and briefly confirm what changed. If it is unclear which person you mean, it should ask. No command is required; `/record` is available when you want to explicitly request a save.
+**Or explicitly start recording with `/record`:**
 
-### 3. Ask questions whenever you need context
+> “/record Here’s my conversation with Alex. Remember what Alex is looking for and anything I promised to follow up on.”
 
-> “What did Riley and I discuss?”
+Provide the conversation with your message. If information is missing or the person's identity is ambiguous, the assistant should ask before saving. Check its confirmation rather than assuming a save happened.
+
+### Connect new information to what you already know
+
+Later, you meet someone else:
+
+> “I met Ben today. Ben designs PCBs, works with Raspberry Pi, and is interested in advising startups. Does this help anyone I’ve mentioned before?”
+
+Your assistant searches the saved information and can connect Ben’s experience to Alex’s earlier request:
+
+> **Example response:** “Alex previously asked for PCB design and embedded systems help. Ben may be a fit. We should check that Alex still needs help and that Ben is open to an introduction.”
+
+The assistant uses your past interactions as evidence and explains the fit and any missing information. It doesn't contact either person automatically. Matching happens when the assistant searches and reasons over your records; it isn't a background scan of everything you do.
+
+You can also ask directly:
+
+> “Who could help Alex with hardware?”
 >
-> “Who in my network needs hardware help?”
+> “What did Alex and I discuss last time?”
 >
 > “Have I promised anyone an introduction?”
 
-The assistant searches your saved records and uses the supporting evidence to answer. It can suggest connections, but doesn't contact anyone automatically.
+No recall command is needed. Another connected AI app can use the same history if it points to the same database.
 
-### 4. Update or control your memory
+### Keep your memory current
 
-> “Riley found a PCB designer. That need is resolved.”
->
-> “Don't save this.”
->
-> “Pause automatic recording.”
->
-> “Undo that save.”
+Talk naturally to correct information or close an old request:
 
-Corrections preserve history. Undo refuses to overwrite later changes. To use the same memory in another AI app, connect it to the same database.
+> “Alex found someone for PCB design. That need is resolved.”
 
-**Check the save confirmation.** Automatic recording depends on the assistant calling the tools; People Memory doesn't independently watch every chat. Try the [first-use check](docs/connecting.md#4-check-it-with-fictional-information) before using real information. Direct ChatGPT connectivity is not included in this release.
+You can also say “Don't save this,” “Pause automatic recording,” or “Undo that save.” The assistant should confirm successful changes. Undo refuses to overwrite later changes; `/record` can explicitly request a save while automatic recording is paused, but doesn't override “don't save.”
 
-## Connect to an AI app
+**Automatic recording depends on your assistant using the connected tools and instructions.** People Memory doesn't independently monitor every chat. Saved records stay on your computer; records returned to a cloud assistant are processed by that assistant's provider.
 
-Install People Match below, then choose your app:
+## Getting started
 
-- **[Claude Desktop](docs/connecting.md#claude-desktop)** — local configuration file.
-- **[Claude Code](docs/connecting.md#claude-code)** — one registration command.
-- **[Codex](docs/connecting.md#codex)** — one registration command.
-- **[Cursor](docs/connecting.md#cursor)** — project MCP configuration.
-- **[ChatGPT](docs/connecting.md#chatgpt)** — not directly supported by this local-only release; requires a reachable remote connection that is not included yet.
+Complete these steps before using the chat workflows above.
 
-**Connecting tools and enabling automatic recording are two separate steps.** After connecting, load the bundled instructions, then complete the fictional first-use check in the guide. Setup examples are documented; live model behavior in these apps remains unverified.
+### 1. Check the requirements
 
-## Download
+- Python 3.10 or newer, with SQLite FTS5 support.
+- An AI app that supports **local MCP servers**—a way for the assistant to call tools on your computer.
+- Access to that app's MCP settings and persistent assistant instructions.
 
-Repository: https://github.com/MattChenyuanZhang/people-memory
+People Memory doesn't need its own model API key. Your chosen assistant may require an account, subscription, or API access.
 
-Download a preview from [Releases](https://github.com/MattChenyuanZhang/people-memory/releases), or clone:
+**Current release:** public developer preview, running locally. Direct ordinary ChatGPT connectivity isn't included; it needs a reachable remote connection. App-specific setup is documented, but live automatic-recording behavior still needs validation. See the [connection guide](docs/connecting.md) for examples and limitations.
+
+### 2. Download
+
+Download and extract the source ZIP from [Releases](https://github.com/MattChenyuanZhang/people-memory/releases), or clone:
 
 ```sh
 git clone https://github.com/MattChenyuanZhang/people-memory.git
 cd people-memory
 ```
 
-The Python package and CLI currently retain their original names: `people-match-memory` and `people-match`. This repository is called People Memory. The package is not published on PyPI; install from this checkout or the release wheel.
+Open a terminal in the extracted/cloned folder. Keep it in a permanent location so your app's connection path won't break later.
 
-## Install
+### 3. Install and create your database
 
-Requires Python 3.10+ with SQLite FTS5. Download this repository, open a terminal in it, and run:
+**macOS / Linux:**
 
 ```sh
 python3 -m venv .venv
-# macOS / Linux
 .venv/bin/python -m pip install '.[mcp]'
 .venv/bin/people-match init
 ```
 
-On Windows use `.venv\Scripts\python.exe` and `.venv\Scripts\people-match.exe`.
+**Windows PowerShell:**
 
-The database is created outside the repository:
-
-- macOS: `~/Library/Application Support/People Match/memory.sqlite3`
-- Windows: `%LOCALAPPDATA%\People Match\memory.sqlite3`
-- Linux: `$XDG_DATA_HOME/people-match/memory.sqlite3` or `~/.local/share/people-match/memory.sqlite3`
-
-Set `PEOPLE_MATCH_DB` to an absolute path to use a different database. Point all assistants at the same file to share memory. Back up before changing versions. This release creates schema version 1, rejects newer databases and refuses to overwrite the original prototype schema.
-
-## Connect your assistant
-
-See [connection instructions](docs/connecting.md). A client launches:
-
-```sh
-/ABSOLUTE/PATH/TO/.venv/bin/people-match serve
+```powershell
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install ".[mcp]"
+.\.venv\Scripts\people-match.exe init
 ```
 
-This is a local stdio MCP process: it waits for client requests and does not open a network port. Simply starting it in a terminal is not an interactive chat.
+`init` creates your personal database outside the repository and prints its location. To share memory across AI apps, use that same database in each connection. Do not upload it to GitHub.
 
-Load [the people-memory skill](skills/people-memory/SKILL.md) or paste the output of `people-match instructions` into the assistant's persistent instructions. The MCP server also supplies the same instructions. Some hosts don't automatically apply all server instructions; verify with the fictional example before using real data.
+The package and command currently retain their original names, `people-match-memory` and `people-match`. The repository is called People Memory. Install from this download; the package isn't published on PyPI.
 
-## Everyday use
+### 4. Connect your AI app
 
-Say: “I met Riley today. Riley needs a PCB designer.” Supply a screenshot, pasted conversation, or note as evidence. The host assistant interprets attachments and calls recording tools with text. It should confirm what was saved and provide a change ID.
+Follow the [connection guide](docs/connecting.md) for your app. Register a **local stdio MCP server** with:
 
-Ask: “Who needs hardware help?” or “What did Riley and I discuss?” No recall command is needed.
+- **Command:** the absolute path to `.venv/bin/people-match`, or `.venv\Scripts\people-match.exe` on Windows.
+- **Arguments:** `serve`.
 
-Say: “Riley found someone” to update the existing need. “Pause automatic recording,” “Don't save this,” and “Undo that save” are supported through the instructions and tools. `/record` is an optional explicit save request; an explicit request can save while automatic recording is paused. Don't-save exclusions still take precedence.
+Your app starts this process when it needs the tools. You don't need to leave a manually launched server running in a terminal.
 
-**Automatic capture depends on the assistant choosing to call the tools.** The server doesn't watch your messages, parse screenshots, or infer whether a statement is real. It enforces pause for automatic writes, evidence excerpts, identity collisions, atomic writes, and revision checks. An assistant can still misclassify content or tool parameters. Excluded content must never be sent to the server, including in source text. Retrieved text is untrusted data, not instructions.
+### 5. Load the memory instructions
 
-Matching happens in your assistant. Search returns source-backed candidates using full-text OR terms; the assistant expands synonyms and checks each person's current history. Historical messages may mention resolved needs, so their text alone isn't an active match. There is no embedding service or proprietary matching model.
-
-## Try the CLI with fictional data
-
-```sh
-.venv/bin/people-match record examples/record-riley.json
-.venv/bin/people-match search 'PCB hardware' --category need --active
-.venv/bin/people-match people Riley
-.venv/bin/people-match changes
-.venv/bin/people-match recording off
-.venv/bin/people-match recording on
-.venv/bin/people-match export /path/to/new-export.json
-.venv/bin/people-match backup /path/to/new-backup.sqlite3
-```
-
-Use a person's returned ID with `person ID`. Use `undo CHANGE_ID` to undo an identified write. Undo refuses later-edit conflicts rather than overwriting history. To update an observation, retrieve its revision and use `update payload.json`; see [record formats](docs/data-format.md).
-
-## Import the original prototype
-
-This is explicit and read-only on the source. Use a **new, empty destination**:
+Display the bundled instructions:
 
 ```sh
-.venv/bin/people-match --db /path/to/new-memory.sqlite3 import-legacy '/path/to/original/people_match.sqlite3'
+# macOS / Linux
+.venv/bin/people-match instructions
 ```
 
-Imports original people, confirmed account URLs, messages, extracted records, skill labels, and provenance metadata. Re-running identical content is idempotent. Original screenshots and files are not copied; source text and legacy references are preserved. Copy any desired attachments separately into storage you control. Cross-person original conversations are duplicated under participants for historical recall; forgetting one participant cannot erase what remains in another participant's conversation history.
-
-## Privacy, undo, and deletion
-
-Data is local, but content returned to a cloud assistant is sent to that assistant/provider. SQLite storage isn't encrypted by this package. Database, backup, and export files use restrictive permissions on supported systems. Your AI host controls tool approvals and can require confirmation for writes.
-
-`forget PERSON_ID --confirm` permanently deletes the selected person's owned live records and related undo snapshots. Explain/confirm scope before using it. External exports, backups, other participants' histories, source platforms, and chat history are unaffected. This isn't forensic secure erasure. Undo is unavailable for deletion.
-
-Export includes live records only. Backup preserves the complete SQLite database including history. An export cannot currently be restored by a dedicated command; restore a backup by pointing `PEOPLE_MATCH_DB` to a copied backup file with all clients stopped.
-
-## Tests and release
-
-```sh
-.venv/bin/python -m unittest discover -s tests -v
+```powershell
+# Windows PowerShell
+.\.venv\Scripts\people-match.exe instructions
 ```
 
-All 17 tests and package builds passed across macOS, Windows, and Linux with Python 3.10 and 3.12. See the [verified run](https://github.com/MattChenyuanZhang/people-memory/actions/runs/42135951604) and [public developer-preview release](https://github.com/MattChenyuanZhang/people-memory/releases/tag/v0.1.0). Actual AI-app conversation behavior still needs validation.
+Add the output to your assistant's persistent project instructions, preserving any instructions already there. If your app supports agent skills, you can install the included [people-memory skill](skills/people-memory/SKILL.md) instead. Check the connection guide for details.
 
-No API key is needed by People Match. Your assistant's subscription or usage charges still apply. Contributions should include tests for storage/identity/undo changes. See [architecture](docs/architecture.md).
+**The connection provides the tools; the instructions explain when to record and retrieve.** Each app/project you use needs the appropriate setup.
 
-Uninstall by disconnecting the MCP server and removing the installed environment. Personal databases remain until you deliberately remove them.
+### 6. Verify before using real information
 
-## License
+In a new connected chat:
 
-[MIT](LICENSE). Always free.
+1. Ask: “Use People Memory to show whether automatic recording is enabled.”
+2. Say: “Please explicitly save this fictional test person: Riley Example needs a PCB designer.” Check for a successful save confirmation and change ID.
+3. In a fresh chat, ask: “Search my memory: what does Riley Example need?” Check that the saved need and evidence are retrieved.
 
+Then follow the [full first-use check](docs/connecting.md#4-check-it-with-fictional-information) to test updates, pause, exclusions, and cross-app recall. You're ready to try the natural-language workflows above when these checks work in your app.
+
+### Further details
+
+- [Connection examples and troubleshooting](docs/connecting.md)
+- [Backups, export, CLI commands, privacy, deletion, and prototype import](docs/reference.md)
+- [Architecture](docs/architecture.md) and [record formats](docs/data-format.md)
+- [Automated test results](https://github.com/MattChenyuanZhang/people-memory/actions/runs/42135951604): 17 tests and package builds passed on macOS, Windows, and Linux with Python 3.10 and 3.12. These test the software and MCP protocol, not actual model behavior.
+
+[MIT license](LICENSE). Always free.
