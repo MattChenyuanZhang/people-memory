@@ -8,7 +8,7 @@ People Memory gives your AI assistant a lasting memory of the people you know: w
 
 Simple and intuitive.
 
-### Remember people
+### 📝 Remember people
 
 Use `/record`:
 
@@ -16,7 +16,7 @@ Use `/record`:
 
 You can also use everyday language when automatic recording is enabled.
 
-### Discover connections
+### 🔗 Discover connections
 
 Later, you meet someone else:
 
@@ -24,7 +24,7 @@ Later, you meet someone else:
 
 **Example response:** “Alex previously asked for PCB design and embedded systems help. Ben may be a fit. We should check that Alex still needs help and that Ben is open to an introduction.”
 
-### Retrieve people’s information
+### 🔎 Retrieve people’s information
 
 Ask for saved information in everyday language:
 
