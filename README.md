@@ -66,8 +66,6 @@ Complete these steps before using the chat workflows above.
 
 People Memory doesn't need its own model API key. Your chosen assistant may require an account, subscription, or API access.
 
-**Current release:** public developer preview, running locally. Direct ordinary ChatGPT connectivity isn't included; it needs a reachable remote connection. App-specific setup is documented, but live automatic-recording behavior still needs validation. See the [connection guide](docs/connecting.md) for examples and limitations.
-
 ### 2. Download
 
 Download and extract the source ZIP from [Releases](https://github.com/MattChenyuanZhang/people-memory/releases), or clone:
