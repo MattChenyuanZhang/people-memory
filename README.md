@@ -18,8 +18,6 @@ Once installed and connected, use your normal AI chat.
 
 > “/record Here’s my conversation with Alex. Remember what Alex is looking for and anything I promised to follow up on.”
 
-Provide the conversation with your message. If information is missing or the person's identity is ambiguous, the assistant should ask before saving. Check its confirmation rather than assuming a save happened.
-
 Updates work the same way. For example: “Alex found someone for PCB design. That need is resolved.” Your assistant should update the existing record and confirm the change.
 
 ### Connect new information to what you already know
