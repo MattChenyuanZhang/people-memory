@@ -86,6 +86,34 @@ class MemoryTests(unittest.TestCase):
         self.assertTrue(self.m.search("PCB",category="need",active_only=True))
         with self.assertRaises(MemoryError):self.m.undo(a["change_id"])
 
+    def test_user_created_need_and_commitment_have_independent_statuses(self):
+        source = "If I find good AI learning resources, I will recommend them to Riley."
+        saved = self.m.record(name="Riley", source_text=source, explicit=True, observations=[
+            {"category":"need", "origin":"user_created", "certainty":"inferred", "text":"Find suitable AI learning resources for Riley; conditional on finding good ones", "evidence":source},
+            {"category":"commitment", "text":"Recommend suitable resources to Riley if found", "evidence":source},
+        ])
+        need_id, commitment_id = saved["observation_ids"]
+        rows = {row["id"]:row["data"] for row in self.m.person(saved["person_id"])["records"]}
+        self.assertEqual(rows[need_id]["origin"], "user_created")
+        self.assertEqual(rows[need_id]["status"], "open")
+        self.assertEqual(rows[need_id]["certainty"], "inferred")
+        self.assertEqual(self.m.search("resources",category="need",active_only=True)[0]["id"],need_id)
+        self.m.update(commitment_id,1,"Recommendation sent","resolved","sent","I sent Riley a recommendation.")
+        self.assertEqual(self.m.search("resources",category="need",active_only=True)[0]["id"],need_id)
+        update = self.m.update(need_id,1,"Riley has suitable resources","resolved","has suitable resources","Riley has suitable resources.")
+        self.assertEqual(self.m.search("resources",category="need",active_only=True),[])
+        rows = {row["id"]:row["data"] for row in self.m.person(saved["person_id"])["records"]}
+        self.assertEqual(rows[need_id]["origin"],"user_created")
+        self.assertTrue(any(row["kind"] == "interaction" and row["data"]["source_text"] == source for row in self.m.person(saved["person_id"])["records"]))
+        self.m.undo(update["change_id"])
+        self.assertEqual(self.m.search("resources",category="need",active_only=True)[0]["data"]["origin"],"user_created")
+
+    def test_invalid_need_origin_is_rejected_without_writing(self):
+        for category, origin in (("need","invented"),("commitment","user_created")):
+            with self.assertRaises(MemoryError):
+                self.record(observations=[{"category":category,"origin":origin,"text":"PCB help","evidence":"PCBs"}])
+        self.assertEqual(self.m.export()["records"],[])
+
     def test_undo_creation_and_duplicate_after_undo(self):
         a=self.record();self.m.undo(a["change_id"])
         self.assertEqual(self.m.export()["records"],[])

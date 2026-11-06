@@ -30,7 +30,9 @@ def record_interaction(name: str, source_text: str, observations: list[dict], pe
     Record a real interaction and evidence-backed observations. Each observation requires category,
     text and evidence (an exact source_text excerpt); optional certainty explicit/inferred/unverified,
     status open/current/resolved/outdated/needs_confirmation. Categories: background,skill,interest,
-    project,need,offer,commitment,note. Supply original text, never a fabricated quote. Don't call for
+    project,need,offer,commitment,note. A need may include origin=requested/user_created/inferred.
+    Concrete user promises to find help/resources can create a user_created need plus a commitment;
+    preserve conditions and do not claim the recipient asked. Supply original text, never a fabricated quote. Don't call for
     hypotheticals or excluded content. explicit=True only for a direct request to save (e.g. /record).
     confirm_distinct=True only after confirming a genuinely different person sharing a name.
     Dates YYYY-MM-DD; leave unknown dates null. Reuse request_id for retries of the same request."""

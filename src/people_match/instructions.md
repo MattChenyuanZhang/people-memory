@@ -34,6 +34,21 @@ Categories: background, skill, interest, project, need, offer, commitment, note.
 not a skill possessed; mention of expertise does not establish willingness to help. Preserve speaker
 and subject distinctions. Leave unknown dates null; don't manufacture a date or quote.
 
+A need can be directly requested or created by the user's actionable follow-up. For example,
+"If I find good AI learning resources, I'll recommend them to you" creates both a commitment
+(the user will recommend) and an open need (find suitable resources for that person). Keep the
+condition and beneficiary clear; do not turn it into a claim that the recipient explicitly asked.
+For need observations, set origin=requested for a direct request, user_created for a concrete
+user offer/promise to help, or inferred for other evidence-based interpretations. Use
+certainty=inferred when the need's content is inferred from context; origin describes who
+created the need, not whether a quote is explicit. An actionable conditional promise can stay
+open without a deadline. Vague encouragement, past recommendations, negated promises, and
+hypotheticals alone do not create active needs. Clarify if the beneficiary or object is unclear.
+Inspect history before adding a need so an existing equivalent need is reused. Keep the
+commitment and need separate: sending a recommendation can fulfill your promise without
+proving the person's underlying need is resolved. For recall and matching, include open
+user-created needs and explain their origin rather than filtering only explicit requests.
+
 Before saving a correction or resolving a need, get_person_history and update_observation with
 its current revision and new evidence. Don't leave the old need open alongside its resolved copy.
 Reuse a stable request_id for retries with the same payload. Never retry a refused identity match

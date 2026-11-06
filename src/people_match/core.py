@@ -223,7 +223,12 @@ class Memory:
             status = item.get("status","open" if category in ("need","commitment") else "current")
             if certainty not in ("explicit","inferred","unverified") or status not in ("open","current","resolved","outdated","needs_confirmation"):
                 raise MemoryError("Invalid certainty or status")
-            clean.append({"category":category,"text":text.strip(),"evidence":evidence,"certainty":certainty,"status":status})
+            observation = {"category":category,"text":text.strip(),"evidence":evidence,"certainty":certainty,"status":status}
+            if "origin" in item:
+                if category != "need" or item["origin"] not in ("requested", "user_created", "inferred"):
+                    raise MemoryError("Need origin must be requested, user_created, or inferred, and applies only to needs")
+                observation["origin"] = item["origin"]
+            clean.append(observation)
         payload = dict(name=name.strip(),source_text=source_text,observations=clean,person_id=person_id,accounts=accounts,occurred_on=occurred_on,source_url=source_url,confirm_distinct=confirm_distinct)
         fingerprint = hashlib.sha256(encode(payload).encode()).hexdigest()
         key = request_id or "auto:"+fingerprint
