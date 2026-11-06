@@ -119,7 +119,13 @@ For now, use a local MCP client above, or use the CLI through a shell-capable ag
 
 ## 3. Enable the recording behavior
 
-Connecting provides tools; it doesn't guarantee automatic use. Display the bundled instructions:
+`people-match init` automatically installs the bundled `people-memory` and `record` skills for detected Codex and Claude Code installations. The Record skill makes the recording workflow selectable in apps that expose skills in their command menu. Restart or refresh the app if necessary. MCP registration and any app approval are still required.
+
+If you installed the app later, rerun `people-match init`, or run `people-match install-skills --app codex` (use `--app claude-code` for Claude Code). Existing different skills are preserved and reported as skipped. `init --no-skills` skips installation. Other apps can use the portable skills when supported or load the instructions manually; MCP alone cannot add menu entries to every app.
+
+Codex uses an existing `$CODEX_HOME/skills` or `~/.codex/skills` directory, otherwise `~/.agents/skills`. Claude Code uses `$CLAUDE_CONFIG_DIR/skills` or `~/.claude/skills`.
+
+For an app without an installed memory skill, display the bundled instructions:
 
 ```sh
 # macOS / Linux

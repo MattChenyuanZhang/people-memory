@@ -1,0 +1,4 @@
+interface:
+  display_name: "Record"
+  short_description: "Save people and conversations to People Memory"
+  default_prompt: "Use $record to extract and save relationship information from the context I share."

@@ -40,7 +40,7 @@ You’ll need Python 3.10+ and an AI app that supports local MCP servers.
 
 Paste this into an AI coding assistant that can run commands and edit files on your computer:
 
-> Install People Memory from https://github.com/MattChenyuanZhang/people-memory. Follow its manual setup and connection guide for my AI app, preserving existing settings. Enable the memory instructions, tell me where my database is stored, and verify saving and retrieving a fictional person. If a step needs me to act in the app, tell me what to do.
+> Install People Memory from https://github.com/MattChenyuanZhang/people-memory. Follow its manual setup and connection guide for my AI app, preserving existing settings. Check that the bundled memory and Record skills were installed for my app, tell me where my database is stored, and verify saving and retrieving a fictional person. If a step needs me to act in the app, tell me what to do.
 
 ### Install manually
 
@@ -57,7 +57,7 @@ People Memory doesn't need its own model API key. Your chosen assistant may requ
 
 #### 2. Download
 
-Download and extract the source ZIP from [Releases](https://github.com/MattChenyuanZhang/people-memory/releases), or clone:
+Download and extract the [latest source ZIP](https://github.com/MattChenyuanZhang/people-memory/archive/refs/heads/main.zip), or clone:
 
 ```sh
 git clone https://github.com/MattChenyuanZhang/people-memory.git
@@ -84,7 +84,7 @@ py -m venv .venv
 .\.venv\Scripts\people-match.exe init
 ```
 
-`init` creates your personal database outside the repository and prints its location. To share memory across AI apps, use that same database in each connection. Do not upload it to GitHub.
+`init` creates your personal database outside the repository and prints its location. It also installs the bundled memory and `/record` skills when it detects Codex or Claude Code. Existing custom skills are preserved; any skipped installations are reported. Restart your app if the skills do not appear. To share memory across AI apps, use that same database in each connection. Do not upload it to GitHub.
 
 The package and command currently retain their original names, `people-match-memory` and `people-match`. The repository is called People Memory. Install from this download; the package isn't published on PyPI.
 
@@ -111,7 +111,7 @@ Display the bundled instructions:
 .\.venv\Scripts\people-match.exe instructions
 ```
 
-Add the output to your assistant's persistent project instructions, preserving any instructions already there. If your app supports agent skills, you can install the included [people-memory skill](skills/people-memory/SKILL.md) instead. Check the connection guide for details.
+If `init` reported the skills as installed for your app, this step is already handled. Otherwise, add the output to your assistant's persistent project instructions, preserving any instructions already there. If your app supports agent skills, you can install the included [people-memory skill](skills/people-memory/SKILL.md) instead. Check the connection guide for details.
 
 **The connection provides the tools; the instructions explain when to record and retrieve.** Each app/project you use needs the appropriate setup.
 

@@ -13,7 +13,9 @@ def main():
     p=argparse.ArgumentParser(description="People Match: persistent relationship memory")
     p.add_argument("--db",help="Database path (or PEOPLE_MATCH_DB); defaults outside the source repository")
     sub=p.add_subparsers(dest="command",required=True)
-    sub.add_parser("init")
+    a=sub.add_parser("init");a.add_argument("--no-skills",action="store_true",help="Skip automatic skill installation")
+    a=sub.add_parser("install-skills",help="Install bundled skills for a supported AI app")
+    a.add_argument("--app",choices=["auto","codex","claude-code"],default="auto")
     sub.add_parser("serve",help="Start local stdio MCP server")
     sub.add_parser("instructions",help="Print assistant instructions")
     a=sub.add_parser("record");a.add_argument("file",help="JSON payload path; - reads stdin")
@@ -31,6 +33,9 @@ def main():
     args=p.parse_args()
     if args.db:
         os.environ["PEOPLE_MATCH_DB"]=str(Path(args.db).expanduser().resolve())
+    if args.command=="install-skills":
+        from .setup_skills import install_skills
+        print(json.dumps(install_skills(args.app),ensure_ascii=False,indent=2));return
     if args.command=="instructions":
         print(files("people_match").joinpath("instructions.md").read_text());return
     if args.command=="serve":
@@ -43,7 +48,11 @@ def main():
     try:
         memory=Memory()
         cmd=args.command
-        if cmd=="init":result={"database":str(memory.path),**memory.preferences()}
+        if cmd=="init":
+            result={"database":str(memory.path),**memory.preferences()}
+            if not args.no_skills:
+                from .setup_skills import install_skills
+                result.update(install_skills())
         elif cmd in ("record","update"):
             payload=json.load(sys.stdin) if args.file=="-" else json.loads(Path(args.file).read_text())
             result=getattr(memory,cmd)(**payload)

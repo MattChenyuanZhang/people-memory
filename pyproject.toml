@@ -25,4 +25,4 @@ people-match = "people_match.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-people_match = ["instructions.md"]
+people_match = ["instructions.md", "bundled_skills/*/SKILL.md", "bundled_skills/*/agents/*.yaml"]
