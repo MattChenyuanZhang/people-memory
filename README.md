@@ -22,6 +22,8 @@ Your assistant should identify Alex, save the relevant information and its sourc
 
 Provide the conversation with your message. If information is missing or the person's identity is ambiguous, the assistant should ask before saving. Check its confirmation rather than assuming a save happened.
 
+Updates work the same way. For example: “Alex found someone for PCB design. That need is resolved.” Your assistant should update the existing record and confirm the change.
+
 ### Connect new information to what you already know
 
 Later, you meet someone else:
@@ -43,14 +45,6 @@ You can also ask directly:
 > “Have I promised anyone an introduction?”
 
 No recall command is needed. Another connected AI app can use the same history if it points to the same database.
-
-### Keep your memory current
-
-Talk naturally to correct information or close an old request:
-
-> “Alex found someone for PCB design. That need is resolved.”
-
-You can also say “Don't save this,” “Pause automatic recording,” or “Undo that save.” The assistant should confirm successful changes. Undo refuses to overwrite later changes; `/record` can explicitly request a save while automatic recording is paused, but doesn't override “don't save.”
 
 **Automatic recording depends on your assistant using the connected tools and instructions.** People Memory doesn't independently monitor every chat. Saved records stay on your computer; records returned to a cloud assistant are processed by that assistant's provider.
 
