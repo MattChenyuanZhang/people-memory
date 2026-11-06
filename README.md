@@ -4,6 +4,44 @@ External relationship memory for AI assistants. Talk naturally about real intera
 
 **Version 0.1.0 is a local developer preview.** The storage engine, command-line interface, and stdio MCP server work. Two independent MCP SDK clients are integration-tested; live ChatGPT, Claude Desktop, and Codex conversations have not yet been validated. No GUI, hosted service, or automatic social-message sync is included.
 
+## How to use it
+
+### 1. Install and connect once
+
+[Download People Memory](https://github.com/MattChenyuanZhang/people-memory/releases), follow [installation](#install), and [connect your AI app](docs/connecting.md). Load the bundled assistant instructions as described in that guide to enable automatic recording.
+
+### 2. Tell your assistant about people
+
+Talk naturally, paste a conversation, or attach a screenshot:
+
+> “I met Riley today. Riley designs PCBs and is interested in startup projects.”
+
+Your connected assistant should save the relevant information and briefly confirm what changed. If it is unclear which person you mean, it should ask. No command is required; `/record` is available when you want to explicitly request a save.
+
+### 3. Ask questions whenever you need context
+
+> “What did Riley and I discuss?”
+>
+> “Who in my network needs hardware help?”
+>
+> “Have I promised anyone an introduction?”
+
+The assistant searches your saved records and uses the supporting evidence to answer. It can suggest connections, but doesn't contact anyone automatically.
+
+### 4. Update or control your memory
+
+> “Riley found a PCB designer. That need is resolved.”
+>
+> “Don't save this.”
+>
+> “Pause automatic recording.”
+>
+> “Undo that save.”
+
+Corrections preserve history. Undo refuses to overwrite later changes. To use the same memory in another AI app, connect it to the same database.
+
+**Check the save confirmation.** Automatic recording depends on the assistant calling the tools; People Memory doesn't independently watch every chat. Try the [first-use check](docs/connecting.md#4-check-it-with-fictional-information) before using real information. Direct ChatGPT connectivity is not included in this release.
+
 ## Connect to an AI app
 
 Install People Match below, then choose your app:
@@ -113,7 +151,7 @@ Export includes live records only. Backup preserves the complete SQLite database
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-CI runs unit and real stdio MCP integration tests across macOS, Windows, and Linux, then builds wheel/source archives. Only local macOS has been exercised in this development session; CI results will be available after you push. No GitHub repository or public release has been created by this package.
+All 17 tests and package builds passed across macOS, Windows, and Linux with Python 3.10 and 3.12. See the [verified run](https://github.com/MattChenyuanZhang/people-memory/actions/runs/42135951604) and [public developer-preview release](https://github.com/MattChenyuanZhang/people-memory/releases/tag/v0.1.0). Actual AI-app conversation behavior still needs validation.
 
 No API key is needed by People Match. Your assistant's subscription or usage charges still apply. Contributions should include tests for storage/identity/undo changes. See [architecture](docs/architecture.md).
 
