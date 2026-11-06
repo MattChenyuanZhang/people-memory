@@ -14,7 +14,7 @@ Use `/record`:
 
 > “/record Here’s my conversation with Alex. Remember what Alex is looking for and anything I promised to follow up on.”
 
-You can also use everyday language when automatic recording is enabled.
+You can also share information naturally—automatic recording is on by default.
 
 ### 🔗 Discover connections
 
