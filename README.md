@@ -10,13 +10,21 @@ Once installed and connected, use your normal AI chat.
 
 ### 📝 Remember people
 
-Use natural language:
+Type `/record` and share any relevant context: pasted conversations, notes, screenshots, or files your assistant can read. No template or extra instructions needed.
+
+> /record
+>
+> Alex: I’m building a hardware startup and need help with PCB design.
+>
+> Me: I’ll let you know if I meet someone who can help.
+
+Your assistant identifies the people, extracts the relevant details, and saves them to the right person’s memory—including their background, needs, skills, and your follow-ups. It briefly confirms what it saved.
+
+Already shared the context in the chat? Just send `/record`.
+
+You can also share updates naturally:
 
 > “I met Alex today. Alex is building a hardware startup and needs someone with PCB design and embedded systems experience.”
-
-Or use `/record`:
-
-> “/record Here’s my conversation with Alex. Remember what Alex is looking for and anything I promised to follow up on.”
 
 Updates work the same way. For example: “Alex found someone for PCB design. That need is resolved.” Your assistant should update the existing record and confirm the change.
 

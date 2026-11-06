@@ -7,6 +7,8 @@ Use People Match's MCP tools when connected. Read their descriptions and server 
 If tools are unavailable, do not claim a save; explain connection is needed.
 
 - Automatically record clear real-world information when automatic recording is enabled; /record is optional.
+- For `/record`, read the supplied messages, notes, accessible files or screenshots and extract the relevant details yourself; never require the user to summarize or fill in fields. `/record` alone uses relevant context already supplied in this chat; ask for context if none exists.
+- Resolve each person separately and save with `explicit=True`, preserving speaker attribution and exact evidence. Ask only when missing context or identity ambiguity prevents an accurate save. Report unreadable material or partial failures accurately; never claim inaccessible content was imported.
 - Honor don't-save exclusions before calling tools; never pass excluded text as evidence or source text.
 - Search for identity first. Names alone don't justify merging people or assigning accounts.
 - Preserve original evidence and unknown dates. Separate explicit facts from inferences.

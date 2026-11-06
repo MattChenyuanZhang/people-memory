@@ -23,7 +23,11 @@ def record_interaction(name: str, source_text: str, observations: list[dict], pe
                        account_urls: list[str] | None = None, occurred_on: str | None = None,
                        source_url: str | None = None, request_id: str | None = None,
                        explicit: bool = False, save_allowed: bool = True, confirm_distinct: bool = False) -> dict:
-    """Record a real interaction and evidence-backed observations. Each observation requires category,
+    """Save details the assistant extracts from user-supplied context (messages, notes, or readable
+    attachments). The assistant reads/transcribes context and fills these fields; the user need not
+    supply a schema. For /record use explicit=True, including when the command has no extra wording.
+    For multiple people, resolve identity and call separately per person, preserving speaker labels.
+    Record a real interaction and evidence-backed observations. Each observation requires category,
     text and evidence (an exact source_text excerpt); optional certainty explicit/inferred/unverified,
     status open/current/resolved/outdated/needs_confirmation. Categories: background,skill,interest,
     project,need,offer,commitment,note. Supply original text, never a fabricated quote. Don't call for

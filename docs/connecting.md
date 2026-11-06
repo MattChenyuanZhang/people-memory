@@ -138,7 +138,16 @@ The MCP server supplies these instructions too, but client handling varies. Inst
 ## 4. Check it with fictional information
 
 1. Ask: “Use People Match to show whether automatic recording is enabled.” Expect a `memory_preferences` tool result.
-2. Say: “I met Riley Example. Riley needs a PCB designer for a prototype. This is fictional test data; please explicitly save it to test the connection.” Expect a successful change ID. Explicitly saving test data is different from mistakenly recording an ordinary hypothetical.
+2. Send the following raw context (explicitly saving fictional test data is allowed):
+
+   ```text
+   /record
+   This is fictional test data; please save it to test the connection.
+   Riley Example: I need a PCB designer for a prototype.
+   Me: I’ll ask around this week.
+   ```
+
+   Expect the assistant to extract Riley’s need and your follow-up without asking you to fill in fields, invoke the save tool, and return a successful change ID. Also try sharing readable context first and sending `/record` separately. For screenshots/files, check that your app can read the attachment; extraction is performed by your assistant, not the database.
 3. In a fresh chat, ask: “Search People Match: what does Riley Example need?” Expect the need and its source evidence.
 4. In a second app pointing to the same database, repeat the question. It should find the same person.
 5. Say “Pause automatic recording.” Confirm the second app sees the paused preference.
