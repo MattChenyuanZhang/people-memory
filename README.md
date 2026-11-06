@@ -6,61 +6,31 @@ People Memory gives your AI assistant a lasting memory of the people you know: w
 
 ## How it works
 
-Once installed and connected, use your normal AI chat.
+Simple and intuitive.
 
-### 📝 Remember people
+### Remember people
 
-Type `/record` and share any relevant context: pasted conversations, notes, screenshots, or files your assistant can read. No template or extra instructions needed.
+Use `/record`:
 
-> /record
->
-> Alex: I’m building a hardware startup and need help with PCB design.
->
-> Me: I’ll let you know if I meet someone who can help.
+> “/record Here’s my conversation with Alex. Remember what Alex is looking for and anything I promised to follow up on.”
 
-Your assistant identifies the people, extracts the relevant details, and saves them to the right person’s memory—including their background, needs, skills, and your follow-ups. It briefly confirms what it saved.
+You can also use everyday language when automatic recording is enabled.
 
-Already shared the context in the chat? Just send `/record`.
-
-You can also share updates naturally:
-
-> “I met Alex today. Alex is building a hardware startup and needs someone with PCB design and embedded systems experience.”
-
-Updates work the same way. For example: “Alex found someone for PCB design. That need is resolved.” Your assistant should update the existing record and confirm the change.
-
-### 🔗 Discover connections
+### Discover connections
 
 Later, you meet someone else:
 
 > “I met Ben today. Ben designs PCBs, works with Raspberry Pi, and is interested in advising startups. Does this help anyone I’ve mentioned before?”
 
-Your assistant searches the saved information and can connect Ben’s experience to Alex’s earlier request:
+**Example response:** “Alex previously asked for PCB design and embedded systems help. Ben may be a fit. We should check that Alex still needs help and that Ben is open to an introduction.”
 
-> **Example response:** “Alex previously asked for PCB design and embedded systems help. Ben may be a fit. We should check that Alex still needs help and that Ben is open to an introduction.”
+### Retrieve people’s information
 
-The assistant uses your past interactions as evidence and explains the fit and any missing information. It doesn't contact either person automatically. Matching happens when the assistant searches and reasons over your records; it isn't a background scan of everything you do.
+Ask for saved information in everyday language:
 
-You can also ask: “Who could help Alex with hardware?”
-
-### 🔎 Retrieve people’s information
-
-Ask for a list of the people you've recorded:
-
-> “Show me everyone saved in People Memory.”
-
-Your assistant can return their names and a brief summary of each person's recorded information.
-
-Or ask about a specific person:
-
-> “Show me everything you've recorded about Alex.”
+> “Show me everyone I’ve recorded.”
 >
-> “What did Alex and I discuss last time?”
->
-> “What is Alex working on, and what help does Alex need?”
-
-The assistant retrieves the person's saved details and past interactions. No special command is required. Another connected AI app can use the same history if it points to the same database.
-
-**Automatic recording depends on your assistant using the connected tools and instructions.** People Memory doesn't independently monitor every chat. Saved records stay on your computer; records returned to a cloud assistant are processed by that assistant's provider.
+> “What do you remember about Alex?”
 
 ## Getting started
 
