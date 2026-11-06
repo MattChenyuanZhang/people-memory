@@ -14,8 +14,6 @@ Once installed and connected, use your normal AI chat.
 
 > “I met Alex today. Alex is building a hardware startup and needs someone with PCB design and embedded systems experience.”
 
-Your assistant should identify Alex, save the relevant information and its source, and briefly confirm what it recorded. You can also paste a conversation, attach a screenshot, or include a profile link to identify the person. A profile link alone doesn't give access to private messages.
-
 **Or explicitly start recording with `/record`:**
 
 > “/record Here’s my conversation with Alex. Remember what Alex is looking for and anything I promised to follow up on.”
