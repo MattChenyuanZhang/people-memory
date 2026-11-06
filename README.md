@@ -8,19 +8,19 @@ People Memory gives your AI assistant a lasting memory of the people you know: w
 
 Once installed and connected, use your normal AI chat.
 
-### Record information about someone
+### 📝 Remember people
 
-**Use natural language:**
+Use natural language:
 
 > “I met Alex today. Alex is building a hardware startup and needs someone with PCB design and embedded systems experience.”
 
-**Or explicitly start recording with `/record`:**
+Or use `/record`:
 
 > “/record Here’s my conversation with Alex. Remember what Alex is looking for and anything I promised to follow up on.”
 
 Updates work the same way. For example: “Alex found someone for PCB design. That need is resolved.” Your assistant should update the existing record and confirm the change.
 
-### Connect new information to what you already know
+### 🔗 Discover connections
 
 Later, you meet someone else:
 
@@ -32,15 +32,25 @@ Your assistant searches the saved information and can connect Ben’s experience
 
 The assistant uses your past interactions as evidence and explains the fit and any missing information. It doesn't contact either person automatically. Matching happens when the assistant searches and reasons over your records; it isn't a background scan of everything you do.
 
-You can also ask directly:
+You can also ask: “Who could help Alex with hardware?”
 
-> “Who could help Alex with hardware?”
+### 🔎 Retrieve people’s information
+
+Ask for a list of the people you've recorded:
+
+> “Show me everyone saved in People Memory.”
+
+Your assistant can return their names and a brief summary of each person's recorded information.
+
+Or ask about a specific person:
+
+> “Show me everything you've recorded about Alex.”
 >
 > “What did Alex and I discuss last time?”
 >
-> “Have I promised anyone an introduction?”
+> “What is Alex working on, and what help does Alex need?”
 
-No recall command is needed. Another connected AI app can use the same history if it points to the same database.
+The assistant retrieves the person's saved details and past interactions. No special command is required. Another connected AI app can use the same history if it points to the same database.
 
 **Automatic recording depends on your assistant using the connected tools and instructions.** People Memory doesn't independently monitor every chat. Saved records stay on your computer; records returned to a cloud assistant are processed by that assistant's provider.
 
